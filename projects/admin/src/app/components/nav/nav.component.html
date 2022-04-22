@@ -1,0 +1,31 @@
+<aside (mouseleave)="leave()" [class.is-open]="isOpen" class="sidebar">
+  <div class="sidebar__logo">
+    <div class="sidebar__logo-wrapper">
+      <img alt="logo" class="sidebar__logo-image" src="/assets/images/sidebar/logo.svg">
+      <p class="sidebar__logo-text text-title">StoryEx</p>
+    </div>
+    <p class="sidebar__logo-text text-additional">Admin panel</p>
+  </div>
+  <ul class="sidebar__links">
+    <ng-container *ngFor="let item of links">
+      <li class="sidebar__links-item">
+        <a [routerLink]="item.link" routerLinkActive="active">
+          <img [src]="item.image" alt="link-image">
+          <span>{{ item.name }}</span>
+        </a>
+      </li>
+    </ng-container>
+  </ul>
+
+  <button (click)="isOpen = !isOpen" class="sidebar__trigger">
+    <i *ngIf="!isOpen" class="pi pi-angle-right"></i>
+    <i *ngIf="isOpen" class="pi pi-angle-left"></i>
+  </button>
+
+  <div class="sidebar__exit">
+    <a routerLink="/auth/login">
+      <img alt="sign out" src="/assets/images/sidebar/sign_out.svg">
+      <span>Exit</span>
+    </a>
+  </div>
+</aside>

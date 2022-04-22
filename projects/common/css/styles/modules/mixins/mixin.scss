@@ -1,0 +1,69 @@
+@use 'sass:math';
+@import '../vars/colors';
+
+@function col-width($widthNum, $default-width: 1368px) {
+  @if ($widthNum == auto) { @return $widthNum; }
+  @return math.percentage( math.div($widthNum, $default-width) );
+}
+
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
+}
+@mixin font-size($fs, $lh: $fs, $important: false) {
+  @if ($important == false) {
+    font-size: $fs;
+    line-height: $lh;
+  } @else {
+    font-size: $fs $important;
+    line-height: $lh $important;
+  }
+}
+@mixin ng-deep {
+  ::ng-deep {
+    @content;
+  }
+}
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+$scrollbar-thumb-color: rgba($col-primary, $alpha: .3);
+$scrollbar-track-color: rgba($col-primary, .1);
+
+// default scrollbar customize
+@mixin custom-scrollbar($track-color: $scrollbar-track-color, $thumb-color: $scrollbar-thumb-color) {
+  // for firefox browser
+  scrollbar-width: thin;
+  scrollbar-color: $thumb-color $track-color;
+
+  // for webkit browsers (google, safari, edge, yandex, opera)
+  &::-webkit-scrollbar {
+    width: 5px;
+    padding: 0 2px;
+    background-color: $track-color;
+
+    &-thumb {
+      border-radius: 10px;
+      background-color: $thumb-color;
+    }
+    &-button:vertical:start:decrement,
+    &-button:vertical:end:increment {
+      display: none;
+    }
+  }
+}
+
+@mixin for-notebook() {
+  @media (max-width: 1680px) {
+    @content;
+  }
+}
+
+@mixin text-ellipsis() {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

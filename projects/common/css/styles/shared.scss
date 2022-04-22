@@ -1,0 +1,351 @@
+@import 'modules/vars/colors';
+@import 'modules/vars/content';
+@import 'modules/mixins/mixin';
+
+.gl-d-flex {
+  display: flex;
+
+  &.center {
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.x-center {
+    justify-content: center;
+  }
+
+  &.y-center {
+    align-items: center;
+  }
+}
+
+.gl-w100 {
+  width: 100%;
+}
+
+.gl-padd {
+  &-x24 {
+    padding: 0 24px;
+  }
+
+  &-24 {
+    padding: 24px;
+  }
+
+  &-b24 {
+    padding-bottom: 24px;
+  }
+
+  &-x10 {
+    padding: 0 10px;
+  }
+  &-x16 {
+    padding: 0 16px;
+  }
+}
+
+.gl-container {
+  width: calc(100% - (36px * 2));
+  margin: 0 auto;
+}
+
+.gl-mar-r16 {
+  margin-right: 16px;
+}
+
+.gl-mar-lspace {
+  margin-left: 0.6rem;
+}
+
+.gl-mar-b24 {
+  margin-bottom: 24px;
+}
+.gl-mar-b16 {
+  margin-bottom: 16px;
+}
+
+
+.gl-input {
+  width: 100%;
+  max-width: 420px;
+  height: 48px;
+  font: 14px/20px $font;
+  border: 1px solid $col-border;
+  transition: border-color .2s ease;
+  border-radius: 10px;
+  padding: 14px 16px;
+  &:disabled,
+  &:read-only,
+  &.disabled {
+    color: $col-text-grey;
+  }
+
+  &:focus,
+  &:hover {
+    border-color: $col-primary;
+  }
+}
+
+//.gl-border-error:not(.gl-border-focused):not(.ng-untouched) {
+//  border-color: $col-warn !important;
+//}
+
+.gl-fv-error:not(.gl-fv-focused):not(.ng-untouched) {
+  border-color: $col-warn !important;
+}
+
+.ng-invalid.ng-touched {
+  //border-color: $col-warn !important;
+}
+
+.form-control {
+  &.ng-valid.ng-touched {
+    border-color: $col-border;
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: $col-warn;
+
+    //&:focus {
+    //  border-color: $col-border;
+    //}
+  }
+}
+
+// form controls inside element with this class will change border based on validity
+//.enable-form-errors {
+//  & .ng-valid.ng-touched {
+//    border-color: $col-border;
+//  }
+//
+//  & .ng-invalid.ng-touched {
+//    border-color: $col-warn;
+//  }
+//}
+
+.gl-status-work {
+  color: $col-success;
+}
+
+.gl-status-warn {
+  color: $col-accent;
+}
+
+.gl-status-error {
+  color: $col-warn;
+}
+
+.gl-main-add {
+  height: 40px;
+  border-radius: 10px;
+  @include font-size(14px, 20px);
+
+  .mat-button-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  mat-icon {
+    @include size(20px);
+    line-height: 20px;
+    &:first-child { margin-right: 8px; }
+    &:last-child { margin-left: 8px; }
+  }
+}
+
+.gl-pointer {
+  cursor: pointer;
+}
+
+.gl-text-ellipsis {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  &.as-absolute {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    padding-right: 16px;
+  }
+}
+
+.gl-checkbox-in-table {
+  mat-checkbox {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: -8px;
+
+    .mat-checkbox-layout {
+      @include size(32px);
+      @include flex-center();
+    }
+
+    .mat-checkbox-inner-container {
+      @include size(100%);
+      @include flex-center();
+      margin: 0;
+
+      .mat-checkbox-background,
+      .mat-checkbox-frame {
+        top: 8px;
+        right: 8px;
+        bottom: 8px;
+        left: 8px;
+      }
+    }
+  }
+}
+
+.gl-drag-btn {
+  @include size(24px);
+  min-width: 24px !important;
+  padding: 0 !important;
+  background: url('#{$path-controls}/drag_handle.svg') center no-repeat;
+}
+
+.gl-request-switcher {
+  display: flex;
+  margin-bottom: 16px;
+
+  &__item {
+    @include font-size(16px,22px);
+    color: $col-placeholder;
+    padding: 6px 12px;
+    margin-right: 6px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: (
+      color .2s ease,
+      border-color .2s ease,
+      background-color .2s ease,
+    );
+
+    &:hover { color: $col-black; }
+    &.active {
+      color: $col-black;
+      border-color: $col-border;
+      background-color: $col-white;
+    }
+  }
+}
+
+@media print {
+  body {
+    padding: 0;
+  }
+
+  app-sidebar {
+    display: none;
+  }
+
+  .gl-printable * {
+    visibility: initial;
+  }
+
+  table {
+    //display:block;
+    page-break-inside: auto;
+  }
+  tr.element-row:nth-child(2000n) {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+}
+
+.gl-params-selected {
+  display: flex;
+  margin-bottom: 6px;
+  color: $col-text-grey;
+
+  &> span {
+    font: 500 14px/20px $font;
+
+    &:first-child {
+      color: $col-black;
+      margin-right: 8px;
+    }
+    &:last-child {
+      color: $col-placeholder;
+    }
+  }
+  &> a {
+    @include font-size(10px,18px);
+    color: $col-primary;
+    margin-left: auto;
+    cursor: pointer;
+  }
+}
+
+.gl-div-table {
+  width: 100%;
+  &:last-child {
+    .gl-div-table__row:last-child {
+      border: 0;
+    }
+  }
+
+  &__row {
+    height: 48px;
+    display: flex;
+    @include font-size(14px, 20px);
+    border-bottom: 1px solid $col-border;
+    transition: background-color .2s ease;
+    @include for-notebook { font-size: 12px; }
+    &:not(:first-child) {
+      cursor: pointer;
+      &:hover { background-color: rgba($col-primary, .1); }
+    }
+    &.select { background-color: rgba($col-primary, .1); }
+
+    &:first-child {
+      font-weight: 500;
+      @include for-notebook {
+        @include font-size(10px,18px);
+      }
+    }
+
+    &-cell {
+      display: flex;
+      align-items: center;
+      padding-right: 16px;
+      flex-grow: 1;
+      &:first-child { padding-left: 24px; }
+      &:last-child { padding-right: 24px; }
+
+      app-table-sorting span {
+        @include size(18px);
+        display: inline-block;
+        background: center no-repeat;
+        background-image: url(/assets/images/sort_off.svg), url(/assets/images/sort_asc.svg), url(/assets/images/sort_desc.svg);
+        transform: translateY(2px);
+        margin-left: 2px;
+        &.sort-off {
+          background-image: url(/assets/images/sort_off.svg);
+        }
+        &.sort-asc {
+          background-image: url(/assets/images/sort_asc.svg);
+        }
+        &.sort-desc {
+          background-image: url(/assets/images/sort_desc.svg);
+        }
+      }
+    }
+  }
+}
+
+.gl-font-bold {
+  font-weight: 500;
+  //font-weight: bold;
+}
+
+.gl-text-grey {
+  color: $col-text-grey;
+}

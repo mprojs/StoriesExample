@@ -1,0 +1,6 @@
+{{{bodyMethodTsComments}}}{{methodName}}({{>operationParameters}}): Observable<{{{resultType}}}> {
+
+    return this.wrapHTTPQuery(this.{{responseMethodName}}(params, config).pipe(
+      map((r: {{@root.responseClass}}<{{{resultType}}}>) => r.body as {{{resultType}}})
+    ), config);
+  }

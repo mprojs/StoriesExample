@@ -1,0 +1,78 @@
+@import 'styles/modules/vars/colors';
+@import 'styles/modules/mixins/mixin';
+
+.wrapper, table {
+  width: 100%;
+}
+
+$cells:
+    (name, 207px),
+    (countryCode, 48px + 84px),
+    (cityName, 39px + 101px),
+    (devicesNum, 110px),
+    (phone, 58px + 502px),
+    (email 132px + 27px),
+    (actions, 24px * 2 + 16px);
+
+
+@each $class, $width in $cells {
+  .thcell-#{$class} {
+    width: col-width($width);
+    @if ($class != phone) {
+      min-width: $width;
+    }
+    @if ($class != email) {
+      padding-right: 16px;
+    }
+    @if ($class != name) {
+      color: $col-text-grey;
+    }
+  }
+}
+
+.cell-name { color: $col-black; }
+.cell-devicesNum { color: $col-primary; }
+
+.cell-actions,
+.thcell-email,
+.thcell-phone,
+.cell-email,
+.cell-phone {
+  text-align: right;
+  padding-left: 16px;
+}
+
+.action-menu {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cell-email {
+  position: relative;
+
+  .gl-text-ellipsis {
+    text-align: right;
+    padding-left: 16px;
+    &.not-producer {
+      left: auto;
+      right: 24px;
+      width: calc(100% - 24px);
+    }
+  }
+}
+.gl-text-ellipsis {
+  width: 100%;
+  position: absolute;
+  top: 50%; left: 0;
+  transform: translateY(-50%);
+}
+
+@include for-notebook {
+  .thcell-devicesNum {
+    min-width: 90px;
+  }
+}
+
+.title {
+  margin: 2rem 0;
+}

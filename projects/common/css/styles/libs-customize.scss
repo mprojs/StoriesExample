@@ -1,0 +1,90 @@
+@import 'modules/mixins/mixin';
+@import 'modules/vars/content';
+@import 'modules/vars/colors';
+
+.mat-input-element {
+  color: $col-black !important;
+}
+
+// datepicker-with-mask
+.datepicker-with-mask {
+  border: none;
+  //border-radius: 6px;
+}
+
+.mat-dialog-content {
+  overflow: unset !important;
+}
+.mat-dialog-actions {
+  justify-content: center;
+}
+
+.mat-pseudo-checkbox-checked,
+.mat-pseudo-checkbox-indeterminate,
+.mat-accent .mat-pseudo-checkbox-checked,
+.mat-accent .mat-pseudo-checkbox-indeterminate {
+  background-color: $col-primary;
+}
+.mat-pseudo-checkbox {
+  color: #c2c2c2; // pseudo-checkbox border-color
+}
+
+.mat-checkbox {
+  --checkbox-border-color: #c2c2c2;
+  --font-weight: 400;
+  --color: $col-black;
+
+  .mat-checkbox-label {
+    font-weight: var(--font-weight);
+    color: var(--color);
+  }
+  .mat-checkbox-frame {
+    border-color: var(--checkbox-border-color) !important;
+  }
+}
+
+.mat-transfer-rules {
+  width: 100%;
+  background-color: #f5f5f5;
+  margin-bottom: 16px;
+  border-radius: 6px !important;
+  padding: 4px;
+  border: 0;
+
+  mat-button-toggle {
+    width: 50%;
+    border: 0 !important;
+    border-radius: 6px;
+    background-color: transparent;
+    &.mat-button-toggle-checked {
+      background: $col-white;
+      &:hover .mat-button-toggle-focus-overlay {
+        opacity: 0 !important;
+      }
+    }
+  }
+}
+
+// ngx-intl-tel-input-pure style ->
+.iti {
+  --border-color: #{$col-border};
+  display: block !important;
+
+  input {
+    height: 48px !important;
+    font: 14px/20px $font !important;
+    border-color: var(--border-color) !important;
+    border-radius: 10px !important;
+    transition: border-color .2s ease;
+    &:focus:not(.ng-touched.ng-invalid),
+    &:hover:not(.ng-touched.ng-invalid) {
+      --border-color: #{$col-primary};
+    }
+  }
+}
+
+ngx-intl-tel-input-pure.mat-form-field-invalid {
+  & .iti {
+    --border-color: #{$col-warn};
+  }
+}

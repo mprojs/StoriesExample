@@ -1,0 +1,22 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "types": [
+      "jest"
+    ]
+  },
+  "files": [
+    "polyfills.ts"
+  ],
+  "include": [
+    "projects/admin/src/**/*.spec.ts",
+    "projects/admin/src/**/*.d.ts"
+  ],
+  "paths": {
+    "@common/*": ["projects/common/*"],
+    "@shared/*": ["projects/admin/src/app/shared/*"],
+    "@modules/*": ["projects/admin/src/app/modules/*"]
+  }
+}

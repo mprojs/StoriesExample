@@ -1,0 +1,40 @@
+@import 'styles/modules/mixins/mixin';
+@import 'styles/modules/vars/colors';
+
+.btn-wrapper {
+  & > * {
+    @include size(100%);
+  }
+}
+
+.trigger {
+  @include size(40px);
+  min-width: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $col-border;
+  background-color: $col-white;
+  padding: 0 !important;
+  &.into-table {
+    @include size(24px);
+    min-width: 24px;
+    background-color: transparent;
+    border: 0;
+  }
+}
+
+@include ng-deep {
+  .mat-menu-panel.action-menu {
+    min-height: 48px !important;
+    min-width: 233px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    margin: 5px 0;
+
+    .mat-menu-content:not(:empty) {
+      padding: 0;
+    }
+  }
+}

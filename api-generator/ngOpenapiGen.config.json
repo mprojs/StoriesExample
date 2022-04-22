@@ -1,0 +1,17 @@
+{
+  "$schema": "../node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
+  "input": "api-generator//api.json",
+  "output": "projects//common//generated-api",
+  "ignoreUnusedModels": false,
+  "modelIndex": false,
+  "serviceIndex": false,
+  "module": false,
+  "serviceSuffix": "ApiService",
+  "skipJsonSuffix": true,
+  "templates": "api-generator//generator-templates",
+  "customizedResponseType": {
+    "/api/v1/common/files/upload": {
+      "toUse": "json"
+    }
+  }
+}

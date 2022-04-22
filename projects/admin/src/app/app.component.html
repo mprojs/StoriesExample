@@ -1,0 +1,8 @@
+<ng-container *ngIf="(busyService.busyState$ | async) as busyState">
+  <div *ngIf="busyState.isBusy" class="progress-bar">
+    <mat-progress-bar class="" mode="indeterminate"></mat-progress-bar>
+  </div>
+</ng-container>
+
+<router-outlet></router-outlet>
+

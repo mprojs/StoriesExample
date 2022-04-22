@@ -1,0 +1,135 @@
+@use '@angular/material' as mat;
+@import '../vars/colors';
+@import '../vars/content';
+@import '../mixins/mixin';
+
+$palette-primary-map: (
+  50: #e4f2fc,
+  100: #bddef9,
+  200: #95cbf6,
+  300: #6eb6f1,
+  400: #51a6ef,
+  500: #3b98ec,
+  600: #368ade,
+  700: $col-primary,
+  800: #2a67b9,
+  900: #204999,
+  contrast: (
+    50: $col-black,
+    100: $col-black,
+    200: $col-black,
+    300: $col-black,
+    400: $col-black,
+    500: $col-white,
+    600: $col-white,
+    700: $col-white,
+    800: $col-white,
+    900: $col-white,
+  )
+);
+$palette-accent-map: (
+  50: #fefce8,
+  100: #fcf7c7,
+  200: #faf2a3,
+  300: #f9ec80,
+  400: #f7e866,
+  500: #f4e24f,
+  600: #f4d34b,
+  700: $col-accent,
+  800: #eca53b,
+  900: #e5802e,
+  contrast: (
+    50: $col-black,
+    100: $col-black,
+    200: $col-black,
+    300: $col-black,
+    400: $col-black,
+    500: $col-white,
+    600: $col-white,
+    700: $col-white,
+    800: $col-white,
+    900: $col-white,
+  )
+);
+$palette-warn-map: (
+  50: #fdecee,
+  100: #fbd0d2,
+  200: #e99f9c,
+  300: #dd7b76,
+  400: $col-warn,
+  500: #e9543c,
+  600: #db4c3b,
+  700: #c94335,
+  800: #bc3d2e,
+  900: #ae3323,
+  contrast: (
+    50: $col-black,
+    100: $col-black,
+    200: $col-black,
+    300: $col-black,
+    400: $col-black,
+    500: $col-white,
+    600: $col-white,
+    700: $col-white,
+    800: $col-white,
+    900: $col-white,
+  )
+);
+
+$my-typography-level: mat.define-typography-level(
+  $font-family: $font,
+  $font-weight: 500,
+  $font-size: 16px,
+  $line-height: 22px,
+);
+$my-typography-config: mat.define-typography-config(
+  $button: $my-typography-level
+);
+
+@include mat.core($my-typography-config);
+
+$my-primary: mat.define-palette($palette-primary-map);
+$my-warn: mat.define-palette($palette-warn-map);
+$my-accent: mat.define-palette($palette-accent-map);
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette($my-primary, 700),
+    accent: mat.define-palette($my-accent, 700),
+    warn: mat.define-palette($my-warn, 400),
+  )
+));
+
+@include mat.button-theme($my-theme);
+@include mat.all-component-themes($my-theme);
+
+.mat-button,
+.mat-raised-button {
+  box-shadow: none !important;
+  padding: 0 16px !important;
+  border-radius: 10px !important;
+}
+
+.mat-tooltip {
+  @include font-size(12px,18px);
+  background-color: #757575;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+}
+
+.mat-icon {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.mat-snack-bar-container {
+  min-width: 100px !important;
+  background-color: $col-primary;
+}
+.mat-snack-bar-no-padding {
+  padding: 0 !important;
+}
+
+.mat-transparent-backdrop {
+  background-color: transparent;
+}

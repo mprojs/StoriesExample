@@ -1,0 +1,79 @@
+@import '../vars/colors';
+@import '../mixins/mixin';
+
+@mixin tableSort {
+  @include size(18px);
+  display: inline-block;
+  background: center no-repeat;
+  background-image: url(/assets/images/sort_off.svg), url(/assets/images/sort_asc.svg), url(/assets/images/sort_desc.svg);
+  transform: translateY(4px);
+  margin-left: 2px;
+  &.sort-off {
+    background-image: url(/assets/images/sort_off.svg);
+  }
+  &.sort-asc {
+    background-image: url(/assets/images/sort_asc.svg);
+  }
+  &.sort-desc {
+    background-image: url(/assets/images/sort_desc.svg);
+  }
+}
+
+.mat-table {
+  width: 100%;
+  //table-layout: fixed;
+  color: $col-black;
+
+  tr.mat-row,
+  tr.mat-header-row {
+    height: 48px;
+
+    &.select { background-color: rgba($col-primary, .1); }
+  }
+
+  thead {
+    .mat-header-cell {
+      font-weight: 500;
+      vertical-align: middle;
+      @include font-size(14px, 20px);
+      color: $col-black;
+      @include for-notebook {
+        @include font-size(10px,18px);
+      }
+
+      &.sort-cell {
+        cursor: pointer;
+        &> span,  {
+          @include tableSort();
+        }
+      }
+
+      & app-table-sorting>span {
+        @include tableSort();
+      }
+    }
+  }
+  tbody {
+    tr.mat-row,
+    tr.mat-footer-row {
+      transition: background-color .2s ease;
+      &:not(.gl-pointer) { cursor: default; }
+      &:hover { background-color: rgba($col-primary, .1); }
+
+      td {
+        border: 0;
+
+        &.mat-cell {
+          @include  font-size(14px,20px);
+          vertical-align: middle;
+          @include for-notebook {
+            @include  font-size(12px,20px);
+          }
+        }
+      }
+    }
+    tr.mat-row:not(.not-border-bottom) {
+      border-bottom: 1px solid $col-border;
+    }
+  }
+}

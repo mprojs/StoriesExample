@@ -1,0 +1,4 @@
+/api-generator/*.ts
+/tools/**/*.js
+/tools/**/*.ts
+**/main.ts

@@ -1,0 +1,64 @@
+<div class="wrapper">
+  <h1 class="title">Stories</h1>
+
+  <app-search-input [control]="searchControl"></app-search-input>
+
+  <ng-container *ngIf='storyListService.currentList$ | async as storyList'>
+    <table [dataSource]='storyList' mat-table [appTableSorting]='storyListService'>
+
+      <ng-container [matColumnDef]='columns.name.propName'>
+        <th mat-header-cell *matHeaderCellDef [appTableSort]='columns.name' class='thcell-name'>
+          {{ columns.name.title }}
+        </th>
+        <td
+          mat-cell
+          *matCellDef='let item'
+          [ngClass]="'cell-' + columns.name.propName"
+          [innerHTML]='item[columns.name.propName] | highlight | async'
+        ></td>
+      </ng-container>
+
+      <ng-container [matColumnDef]="columns.createdAtMs.propName">
+        <th mat-header-cell *matHeaderCellDef [appTableSort]='columns.createdAtMs'
+            class="thcell-actions">{{ columns.createdAtMs.title }}</th>
+        <td mat-cell *matCellDef="let item" [ngClass]="'cell-' + columns.createdAtMs.propName">
+          {{item[columns.createdAtMs.propName] | date:'dd/MM/yyyy HH:mm'}}
+        </td>
+      </ng-container>
+
+      <ng-container [matColumnDef]="columns.status.propName">
+        <th mat-header-cell *matHeaderCellDef class="thcell-actions">{{ columns.status.title }}</th>
+        <td mat-cell *matCellDef="let item" [ngClass]="'cell-' + columns.status.propName">
+          {{item[columns.status.propName]}}
+        </td>
+      </ng-container>
+
+      <ng-container [matColumnDef]="columns.actions.propName">
+        <th mat-header-cell *matHeaderCellDef class="thcell-actions">{{ columns.actions.title }}</th>
+        <td mat-cell *matCellDef="let item" [ngClass]="'cell-' + columns.actions.propName">
+          <ng-container [ngTemplateOutlet]="actions"
+                        [ngTemplateOutletContext]="{ story: item }"></ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="my-header-row"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [routerLink]="row.id"
+          class="gl-pointer"></tr>
+    </table>
+  </ng-container>
+</div>
+
+<ng-template #actions let-story="story">
+  <app-actions-menu [triggerIntoTable]="true">
+    <ng-template>
+      <div (click)="removeClick(story)">
+        <span>Remove</span>
+      </div>
+    </ng-template>
+    <ng-template>
+      <div (click)="archiveClick(story)">
+        <span>Archive</span>
+      </div>
+    </ng-template>
+  </app-actions-menu>
+</ng-template>

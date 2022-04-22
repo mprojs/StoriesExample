@@ -1,0 +1,21 @@
+<button mat-raised-button routerLink="../">Return</button>
+
+<form (ngSubmit)="$event.preventDefault()" [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput type="text" [formControl]="form.controls.name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <input matInput type="text" [formControl]="form.controls.desc">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select class="status" [formControl]="form.controls.status">
+      <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="saveClick()">Save</button>
+</form>
+

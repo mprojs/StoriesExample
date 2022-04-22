@@ -1,0 +1,32 @@
+variables:
+  WEBAPP_IMAGE: "compname/stories-front:latest"
+  TOKEN: $DOCKER_TOKEN
+
+default:
+  image: docker:20
+  before_script:
+    - mkdir -p $HOME/.docker
+    - echo $DOCKER_AUTH_CONFIG > $HOME/.docker/config.json
+
+
+stages:
+  - build2
+  - deploy
+
+build_in_container:
+  stage: build2
+  only:
+    - master
+  script:
+    - docker build --pull -t $WEBAPP_IMAGE -f ci/Dockerfile .
+    - docker push $WEBAPP_IMAGE
+
+deploy:
+  image: projects/ssh-exec:v1
+  stage: deploy
+  only:
+    - master
+  script:
+    - /exec.sh sudo /etc/projects/front/update.sh
+
+

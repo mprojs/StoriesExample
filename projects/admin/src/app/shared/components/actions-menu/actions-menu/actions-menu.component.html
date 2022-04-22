@@ -1,0 +1,17 @@
+
+<button *ngIf="showMenuButton" class="trigger" mat-button
+        [matMenuTriggerFor]="menu"
+        [class.into-table]="triggerIntoTable">
+  <mat-icon>more_vert</mat-icon>
+</button>
+
+<mat-menu class="action-menu" #menu="matMenu">
+  <ng-content></ng-content>
+  <button
+    mat-menu-item
+    *ngFor="let act of onlyMarkedTemplates ? actionTemplateRefs : templateRefs"
+    class="btn-wrapper"
+  >
+    <ng-container *ngTemplateOutlet="act"></ng-container>
+  </button>
+</mat-menu>
