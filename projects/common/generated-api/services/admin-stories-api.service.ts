@@ -466,10 +466,7 @@ export class AdminStoriesApiService extends BaseService {
     //   map((r: StrictHttpResponse<ResponsePageableListDtoStoryListAdminDto>) => r.body as ResponsePageableListDtoStoryListAdminDto)
     // ), config);
 
-    console.log(params);
-
     const data = this.fakeData.filter(item => item.name.includes(params.body.query));
-
 
     return of({
       result: {
@@ -486,7 +483,7 @@ export class AdminStoriesApiService extends BaseService {
           }
         }),
         totalItems: data.length,
-        totalPages: Math.floor(data.length / params.body.limit)
+        totalPages: Math.ceil(data.length / params.body.limit)
       }
     });
   }

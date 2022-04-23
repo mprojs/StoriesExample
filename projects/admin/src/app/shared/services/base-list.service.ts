@@ -168,7 +168,7 @@ export abstract class BaseListService<T> {
 
   private fillCurrentList(list: T[]) {
     this.currentList.next(list);
-    this.lastResultIsEmpty$.next({ empty: list.length === 0 });
+    this.lastResultIsEmpty$.next({ empty: !list || list.length === 0 });
   }
 
   private clearCache() {
